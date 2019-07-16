@@ -2,6 +2,7 @@
 // used to include library before compiling
 // <iostream> -> header file
 #include <iostream>
+#include <ctime>
 
 int AddNumbers(int a, int b, int c)
 {
@@ -27,7 +28,7 @@ bool CheckGuess(int GuessSum, int CodeSum, int GuessProduct, int CodeProduct)
 {
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "Your guess was correct. You won\n\n\n";
+        std::cout << "Your guess was correct.\n\n\n";
         return true;
     }
     else
@@ -37,13 +38,19 @@ bool CheckGuess(int GuessSum, int CodeSum, int GuessProduct, int CodeProduct)
     }
 }
 
+int generateRandomNumber(int max)
+{
+    return rand() % (max) + 1;
+}
+
 int PlayGame(int LevelDifficulty)
 {
     PrintIntroduction(LevelDifficulty);
 
-    const int CodeA = 1;
-    const int CodeB = 3;
-    const int CodeC = 2;
+    const int CodeA = generateRandomNumber(LevelDifficulty);
+    const int CodeB = generateRandomNumber(LevelDifficulty);
+    const int CodeC = generateRandomNumber(LevelDifficulty);
+    // std::cout << CodeA << CodeB << CodeC;
 
     int CodeSum = AddNumbers(CodeA, CodeB, CodeC);
     int CodeProduct = MultiplyNumbers(CodeA, CodeB, CodeC);
@@ -69,9 +76,13 @@ int PlayGame(int LevelDifficulty)
 
 int main()
 {
-    int LevelDifficulty = 0;
-    while (true)
+    srand(time(NULL));
+    int LevelDifficulty = 1;
+    int const MaxDifficulty = 5;
+
+    while (LevelDifficulty <= MaxDifficulty)
     {
+
         bool bLevelComplete = PlayGame(LevelDifficulty);
         std::cin.clear();
         std::cin.ignore();
@@ -79,8 +90,11 @@ int main()
         if (bLevelComplete)
         {
             ++LevelDifficulty;
+            std::cout << "You are moving on to next level!";
         }
     }
+
+    std::cout << "Congratulations on winning the game\n";
 
     return 0;
 }
