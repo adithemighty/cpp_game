@@ -1,5 +1,5 @@
 # cpp_game
-Fiddling around with cpp
+Super simple game: You have to guess a code of digits. You will receive a hint what does numbers add and multiply to.  
 
 1. Check if you have g++ (on mac) to compile game `g++ -v`
 2. Checkout this repo
